@@ -1,8 +1,5 @@
 package com.example.parcial29mar
 
-import androidx.compose.ui.text.input.KeyboardOptions
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -37,15 +34,13 @@ fun BilleteraScreen(saldo: Int, onRetirar: (Int) -> Unit) {
             OutlinedTextField(
                 value = input,
                 onValueChange = {
-                    input = it
-                    error = false
+                    if (it.all { char -> char.isDigit() }) {
+                        input = it
+                        error = false
+                    }
                 },
                 label = { Text("Monto a retirar") },
                 isError = error,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Done
-                ),
                 singleLine = true,
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = MaterialTheme.colorScheme.primary,
