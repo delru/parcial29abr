@@ -22,8 +22,8 @@ fun BilleteraScreen(saldo: Int, onRetirar: (Int) -> Unit) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Saldo disponible:", fontSize = 20.sp)
-        Text(text = "$$saldo", fontSize = 32.sp, color = Color(0xFF2E7D32))
+        Text(text = "Saldo disponible:", fontSize = 30.sp)
+        Text(text = "$$saldo", fontSize = 52.sp, color = Color(0xFF2E7D32))
 
         Spacer(modifier = Modifier.height(40.dp))
 

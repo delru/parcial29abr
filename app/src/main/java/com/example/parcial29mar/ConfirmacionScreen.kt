@@ -7,9 +7,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun ConfirmacionScreen(monto: Int) {
+fun ConfirmacionScreen(monto: Int, navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -20,13 +21,23 @@ fun ConfirmacionScreen(monto: Int) {
         Text(text = "Comprobante de retiro", fontSize = 24.sp)
         Spacer(modifier = Modifier.height(30.dp))
         Text(
+            text = "Felicidades!",
+            fontSize = 20.sp
+        )
+        Text(
             text = "Retiraste efectivamente el monto de:",
-            fontSize = 18.sp
+            fontSize = 20.sp
         )
         Text(
             text = "$$monto",
             fontSize = 32.sp,
             color = MaterialTheme.colorScheme.primary
         )
+
+        Spacer(modifier = Modifier.height(40.dp))
+
+        Button(onClick = { navController.popBackStack() }) {
+            Text("VOLVER A BILLETERA")
+        }
     }
 }

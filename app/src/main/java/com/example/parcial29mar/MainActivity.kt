@@ -12,6 +12,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
+//Nota: lo estuve probando en un Pixel 8 Pro y Pixel 7 y andaba bien.
+//      se veia bien proporcionalmente y con buenos colores.
+//      Tambien me tome la libertad de setear el monto inicial en 100.000.
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     }
                     composable("confirmacion/{monto}") { backStackEntry ->
                         val monto = backStackEntry.arguments?.getString("monto")?.toIntOrNull() ?: 0
-                        ConfirmacionScreen(monto)
+                        ConfirmacionScreen(monto, navController)
                     }
                 }
             }
