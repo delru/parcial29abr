@@ -1,47 +1,41 @@
 package com.example.parcial29mar
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.parcial29mar.ui.theme.Parcial29marTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            Parcial29marTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+            MaterialTheme {
+                val navController = rememberNavController()
+                var saldo by remember { mutableStateOf(100000) }
+
+                NavHost(navController = navController, startDestination = "billetera") {
+                    composable("billetera") {
+                        BilleteraScreen(
+                            saldo = saldo,
+                            onRetirar = { montoRetirado ->
+                                saldo -= montoRetirado
+                                navController.navigate("confirmacion/$montoRetirado")
+                            }
+                        )
+                    }
+                    composable("confirmacion/{monto}") { backStackEntry ->
+                        val monto = backStackEntry.arguments?.getString("monto")?.toIntOrNull() ?: 0
+                        ConfirmacionScreen(monto)
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Parcial29marTheme {
-        Greeting("Android")
     }
 }
