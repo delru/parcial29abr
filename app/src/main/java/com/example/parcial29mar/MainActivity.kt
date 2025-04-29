@@ -12,8 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
-//Nota: lo estuve probando en un Pixel 8 Pro y Pixel 7 y andaba bien.
-//      se veia bien proporcionalmente y con buenos colores.
+//Nota: lo estuve probando en un Pixel 8 Pro y Pixel 7 y andaba perfecto y bonito
 //      Tambien me tome la libertad de setear el monto inicial en 100.000.
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
